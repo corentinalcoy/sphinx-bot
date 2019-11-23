@@ -132,4 +132,4 @@ STATIC_URL = '/static/'
 
 # GITHUB
 GITHUB_APP_KEY = os.getenv("GITHUB_APP_KEY")
-GITHUB_APP_SECRET = os.getenv("GITHUB_APP_SECRET")
+GITHUB_APP_SECRET = os.getenv("GITHUB_APP_SECRET").encode()
