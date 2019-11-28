@@ -41,7 +41,7 @@ class GithubAPI(object):
 
         payload = {
             'iat': datetime.utcnow(),
-            'exp': datetime.utcnow() + timedelta(minutes=10),
+            'exp': datetime.utcnow() + timedelta(minutes=5),
             'iss': settings.GITHUB_APP_KEY,
         }
 

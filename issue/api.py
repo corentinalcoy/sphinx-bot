@@ -17,3 +17,8 @@ def api_issue_record(author, repository, data, model):
     except IntegrityError as e:
         raise e
     return instance
+
+
+@transaction.atomic
+def api_issue_comment_record(author, issue, data, model):
+    pass
