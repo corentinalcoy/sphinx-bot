@@ -1,4 +1,6 @@
 def hook_created(data):
+    from pprint import pprint
+    pprint(data)
     pass
 
 

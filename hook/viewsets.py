@@ -10,6 +10,8 @@ class HookViewSet(GenericViewSet):
     def post(self, request, *args, **kwargs):
         data = request.data
         action = data['action']
+        from pprint import pprint
+        pprint(data)
         event = request.META.get('HTTP_X_GITHUB_EVENT', None)
         if not event:
             return Response({'result': False}, status=status.HTTP_200_OK)
