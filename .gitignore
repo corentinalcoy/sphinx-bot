@@ -5,3 +5,4 @@ db.sqlite3
 *pem
 node_modules
 package-lock.json
+celerybeat*.db
