@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class BotReminderConfig(AppConfig):
-    name = "bot.reminder"
+    name = "bot.remind"
     label = "bot_reminder"

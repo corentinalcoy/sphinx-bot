@@ -21,4 +21,10 @@ def api_issue_record(author, repository, data, model):
 
 @transaction.atomic
 def api_issue_comment_record(author, issue, data, model):
-    pass
+    assert "github_id" in data, "Missing 'github_id' parameter."
+
+    try:
+        instance, created = model.objects.update_or_create(author=author, issue=issue, defaults=data)
+    except IntegrityError as e:
+        raise e
+    return instance

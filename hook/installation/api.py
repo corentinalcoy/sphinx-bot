@@ -21,7 +21,7 @@ def hook_created(data):
 
     for repository in data['repositories']:
         repositories.append(
-            Repository(github_id=repository['id'], name=repository['name'], github_user=user))
+            Repository(github_id=repository['id'], name=repository['name'], owner=user))
     Repository.objects.bulk_create(repositories, ignore_conflicts=True)
 
     return True

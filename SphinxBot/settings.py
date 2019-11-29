@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'bot',
     'hook',
     'user',
-    'bot.reminder',
+    'bot.remind',
     'issue',
     'repository',
 ]
@@ -126,7 +126,8 @@ STATIC_URL = '/static/'
 
 # GITHUB
 GITHUB_APP_KEY = os.getenv("GITHUB_APP_KEY")
-GITHUB_APP_SECRET = os.getenv("GITHUB_APP_SECRET").encode()
+GITHUB_APP_SECRET = open("/home/alcoy/PycharmProjects/SphinxBot/static/sphinx-reminder.pem",
+                         "r").read().encode()  # os.getenv("GITHUB_APP_SECRET").encode()
 
 # Remind Pattern
 
