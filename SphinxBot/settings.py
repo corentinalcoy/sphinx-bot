@@ -131,3 +131,6 @@ GITHUB_APP_SECRET = os.getenv("GITHUB_APP_SECRET").encode()
 # Remind Pattern
 
 REMIND_PATTERN = "@sphinxremind[\s*in*\d+]+[adehikmnortuwy]{1,6}s{0,1}"
+
+# CELERY
+CELERY_BROKER_URL = "pyamqp://guest@localhost//"
