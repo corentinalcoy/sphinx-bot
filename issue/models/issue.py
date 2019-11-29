@@ -4,6 +4,7 @@ from django.db import models, IntegrityError
 from issue.api import api_issue_record
 from repository.models import Repository
 from user.models import Connector, GithubUser
+from xlib.api import GithubAPI
 
 
 class IssueManager(models.Manager):
@@ -16,8 +17,8 @@ class IssueManager(models.Manager):
 
         try:
             issue = api_issue_record(author, repository, clean_data, Issue)
-        except IntegrityError:
-            return None
+        except IntegrityError as e:
+            raise e
         return issue
 
     def _get_cleaned_data(self, data):
@@ -31,7 +32,7 @@ class IssueManager(models.Manager):
     def _get_github_repository(self, data, connector):
         repository, created = Repository.objects.get_or_create(github_id=data['id'], defaults={
             'name': data['name'],
-            'github_user': connector.github_user
+            'owner': connector.github_user
         })
 
         return repository
@@ -47,7 +48,13 @@ class IssueManager(models.Manager):
         try:
             connector = Connector.objects.get(installation_id=data['id'])
         except ObjectDoesNotExist:
-            return None
+            api = GithubAPI(token=None)
+            response = api.get(f"app/installations/{data['id']}")
+            if response.status_code == 200:
+                github_user = GithubUser.objects.record(response.json())
+                connector = Connector.objects.record(data={'installation_id': data['id'], 'github_user': github_user})
+            else:
+                return None
         return connector
 
 
